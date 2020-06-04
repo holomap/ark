@@ -1,0 +1,75 @@
+* {
+	margin  : 0px;
+	padding : 0px;
+}
+html, body {
+	width:100%;
+	height:100%;
+}
+#main {
+	display: block;
+	width:100%;
+	height:100%;
+}
+nav>ul {
+	position: absolute;
+	top: 3px;
+	left:150px;
+	z-index: 99;
+}
+nav>ul>li {
+	list-style-type: none;
+	display: block;
+	padding:4px 10px;
+	margin-right  : 18px;
+	float   : left;
+	overflow: hidden;
+	height:18px;
+	line-height:18px;
+	font-size: 10px; font-size: 1.0rem;
+	        border-radius: 10px;
+	-webkit-border-radius: 10px;
+	   -moz-border-radius: 10px;
+	background-color  : #FFF;
+}
+nav>ul>li>a {text-decoration: none;}
+nav>ul>li.current {
+	background-color  : #DDD;
+	color: #222;
+	pointer-events: none;
+}
+nav>img {
+	position: absolute;
+	z-index: 99;
+	top: calc(50% - 9px);
+	left: calc(50% - 9px);
+	user-select: none;
+	pointer-events: none;
+}
+
+/*------------------------------------*/
+div.Marker {
+	margin-left:-10px;
+	margin-top:-28px;
+	font-weight: bold;
+	-webkit-text-stroke: 0.05em #FFFFFF;
+}
+
+div.Marker>div:nth-of-type(1) {
+	width:auto;
+
+	float: left;
+}
+div.Marker>div:nth-of-type(2) {
+	width: calc(100% - 0.5em - 21px);
+	float: right;
+}
+
+div.Marker>div:nth-of-type(2)>img {
+	margin-right:0.5em;
+	width: 3em;
+	        border-radius: 20%;
+	-webkit-border-radius: 20%;
+	   -moz-border-radius: 20%;
+}
+

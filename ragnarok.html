@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="UTF-8">
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.csv.min.js"></script>
+<script src="js/openseadragon.js"></script>
+<script src="js/openseadragon-bookmark-url.js"></script>
+<script src="js/OpenSeadragonHTMLelements.js"></script>
+<script src="js/openseadragon-imaginghelper.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="shortcut icon" href="images/favicon.ico" type="image/vnd.microsoft.icon">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-145408095-1"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'UA-145408095-1');
+</script>
+<title>ホロライブARK：ラグナロク</title>
+</head><body>
+<nav>
+<ul>
+<li><a href="./">アベレーション</a></li>
+<li class="current"><a href="./ragnarok.html">ラグナロク</a></li>
+</ul>
+<img src="images/center.gif">
+</nav>
+<main id="main"></main>
+<script type="text/javascript">
+
+
+	var liverfile = 'liver.csv';
+	var liver = [];
+	function readLiverCsv(data) {
+		var csv = $.csv.toArrays(data);
+		for(var i=0; i<csv.length; i++){
+			if(i>0){
+				liver[csv[i][1]] = {
+					ID:      csv[i][0], 
+					ICON:    csv[i][2],
+					TWITTER: csv[i][3],
+					FACE:    csv[i][4]
+				};
+			}
+		}
+	}
+
+	var markerfile = 'ragnarok.csv';
+	var marker = [];
+	function readMarkerCsv(data) {
+		var csv = $.csv.toArrays(data);
+		for(var i=0; i<csv.length; i++) if(i>0) marker.push(csv[i]);
+	}
+
+	$.get(liverfile,  readLiverCsv,  'text');// ライバー情報
+	$.get(markerfile, readMarkerCsv, 'text');// マーカー情報
+
+	$(document).ajaxStop(function() {
+
+		// 地図生成
+		var viewer = OpenSeadragon({
+			id: "main", 
+			prefixUrl: "images/", 
+			showNavigator: true, 
+			tileSources: {
+				Image: {
+					xmlns:   "http://schemas.microsoft.com/deepzoom/2008",
+					Url:  "ragnarok/",
+					Format:   "jpg", 
+					Overlap:  "2", 
+					TileSize: "256",
+					Size: {
+						Height: "32000",
+						Width:	"32000"
+					}
+				}
+			}
+		});
+
+		// 座標URL表示
+		viewer.bookmarkUrl();
+
+		// 変化検知
+		var imagingHelper = viewer.activateImagingHelper({onImageViewChanged: onImageViewChanged});
+		function onImageViewChanged(event) {
+			//alert(imagingHelper.getZoomFactor());
+			if(imagingHelper.getZoomFactor() > 0.1){
+				$("div.Marker>div:nth-of-type(2)").css('display','block');
+			} else {
+				$("div.Marker>div:nth-of-type(2)").css('display','none');
+			}
+		}
+
+		// HTML要素追加
+		var hEl = viewer.HTMLelements();
+		var M = [];
+		for(var i=0; i<marker.length; i++){
+			var face = "";
+			var f = marker[i][4].split(',');
+			$(f).each(function() {
+				if (this.length > 0) $(this).each(function() {face += "<img src='"+liver[this]['FACE']+"'>";});
+			});
+
+
+			M[i] = document.createElement("div");
+			M[i].className = "Marker";
+			M[i].innerHTML = "<div><img src='images/marker_"+marker[i][3]+".png' title='"+marker[i][2]+"【X"+marker[i][0]+"、Y"+marker[i][1]+"】\n"+marker[i][5]+"'></div><div>"+face+"<br>"+marker[i][2]+"</div>";
+
+			hEl.addElement(
+				{
+					id: "M"+i,
+					element: M[i],
+					x: 520+316*Number(marker[i][0]),
+					y: 600+312*Number(marker[i][1]),
+					width: 800,
+					height: 800,
+					fontSize: 1.5
+				}
+			)
+
+		}
+	});
+</script>
+</body>
+</html>
