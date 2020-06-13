@@ -16,11 +16,12 @@
 	gtag('js', new Date());
 	gtag('config', 'UA-145408095-1');
 </script>
-<title>ホロライブARK：アベレーション</title>
+<title>ホロライブARK：クリスタル・アイルズ</title>
 </head><body>
 <nav>
 <ul>
-<li class="current"><a href="./">アベレーション</a></li>
+<li class="current"><a href="./">クリスタル・アイルズ</a></li>
+<li><a href="./aberration.html">アベレーション</a></li>
 <li><a href="./ragnarok.html">ラグナロク</a></li>
 </ul>
 <img src="images/center.gif">
@@ -45,7 +46,7 @@
 		}
 	}
 
-	var markerfile = 'aberration.csv';
+	var markerfile = 'crystal_isles.csv';
 	var marker = [];
 	function readMarkerCsv(data) {
 		var csv = $.csv.toArrays(data);
@@ -110,8 +111,8 @@
 				{
 					id: "M"+i,
 					element: M[i],
-					x: 495+316*Number(marker[i][0]),
-					y: 605+311*Number(marker[i][1]),
+					x: 462+324*Number(marker[i][0]),
+					y: 545+305*Number(marker[i][1]),
 					width: 800,
 					height: 800,
 					fontSize: 1.5
