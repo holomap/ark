@@ -16,11 +16,12 @@
 	gtag('js', new Date());
 	gtag('config', 'UA-145408095-1');
 </script>
-<title>ホロライブARK：クリスタル・アイルズ</title>
+<title>ホロライブARK：ロスト・アイランド</title>
 </head><body>
 <nav>
 <ul>
-<li class="current"><a href="./">クリスタル・アイルズ</a></li>
+<li class="current"><a href="./">ロスト・アイランド</a></li>
+<li><a href="./crystal_isles.html">クリスタル・アイルズ</a></li>
 <li><a href="./extinction.html">エクスティンクション</a></li>
 <li><a href="./scorched_earth.html">スコーチドアース</a></li>
 <li><a href="./aberration.html">アベレーション</a></li>
@@ -48,7 +49,7 @@
 		}
 	}
 
-	var markerfile = 'crystal_isles.csv';
+	var markerfile = 'lost_island.csv';
 	var marker = [];
 	function readMarkerCsv(data) {
 		var csv = $.csv.toArrays(data);
@@ -65,13 +66,17 @@
 			id: "main", 
 			prefixUrl: "images/", 
 			showNavigator: true, 
+			imageSmoothingEnabled: false,
+			maxZoomPixelRatio: 8,
 			tileSources: {
 				Image: {
 					xmlns:   "http://schemas.microsoft.com/deepzoom/2008",
-					Url:  "crystal_isles/",
+					Url:  "lost_island/",
 					Format:   "jpg", 
 					Overlap:  "2", 
 					TileSize: "256",
+					minLevel: 8,
+					maxLevel: 10,
 					Size: {
 						Height: "32000",
 						Width:	"32000"
@@ -113,8 +118,8 @@
 				{
 					id: "M"+i,
 					element: M[i],
-					x: 462+324*Number(marker[i][0]),
-					y: 545+305*Number(marker[i][1]),
+					x: 445+317*Number(marker[i][0]),
+					y: 559+311*Number(marker[i][1]),
 					width: 800,
 					height: 800,
 					fontSize: 1.5

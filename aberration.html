@@ -20,7 +20,8 @@
 </head><body>
 <nav>
 <ul>
-<li><a href="./">クリスタル・アイルズ</a></li>
+<li><a href="./">ロスト・アイランド</a></li>
+<li><a href="./crystal_isles.html">クリスタル・アイルズ</a></li>
 <li><a href="./extinction.html">エクスティンクション</a></li>
 <li><a href="./scorched_earth.html">スコーチドアース</a></li>
 <li class="current"><a href="./aberration.html">アベレーション</a></li>
@@ -65,6 +66,8 @@
 			id: "main", 
 			prefixUrl: "images/", 
 			showNavigator: true, 
+			imageSmoothingEnabled: false,
+			maxZoomPixelRatio: 8,
 			tileSources: {
 				Image: {
 					xmlns:   "http://schemas.microsoft.com/deepzoom/2008",
@@ -72,6 +75,8 @@
 					Format:   "jpg", 
 					Overlap:  "2", 
 					TileSize: "256",
+					minLevel: 8,
+					maxLevel: 10,
 					Size: {
 						Height: "32000",
 						Width:	"32000"
